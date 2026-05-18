@@ -967,6 +967,109 @@
 
   /* utility */
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+  /* ===== DESKTOP (≥ 860px) ===== */
+  @media (min-width: 860px) {
+
+    body { background: var(--ivory-warm); }
+
+    /* App shell: sidebar + content side by side */
+    .app {
+      max-width: 1340px;
+      box-shadow: 0 0 80px -20px rgba(74,6,23,0.2);
+      display: grid;
+      grid-template-columns: 272px 1fr;
+      grid-template-rows: 1fr;
+      min-height: 100vh;
+      margin: 0 auto;
+    }
+
+    /* Hide mobile header / hamburger */
+    .header { display: none !important; }
+
+    /* Drawer becomes a sticky left sidebar */
+    .scrim { display: none !important; }
+    .drawer {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 272px;
+      transform: none !important;
+      transition: none !important;
+      grid-column: 1;
+      grid-row: 1;
+      overflow-y: auto;
+      padding: 44px 32px 40px;
+    }
+    .drawer__close { display: none; }
+    .drawer__brand { font-size: 50px; margin: 12px 0 4px; }
+    .drawer__sub { margin-bottom: 32px; }
+    .drawer__link { font-size: 15px; letter-spacing: 0.14em; padding: 11px 0; }
+
+    /* Main content column */
+    main {
+      grid-column: 2;
+      grid-row: 1;
+      min-width: 0;
+      background: var(--white);
+    }
+
+    /* Home hero fills its column */
+    .home { min-height: 100vh; }
+    .home__title { font-size: clamp(72px, 7vw, 108px); }
+    .countdown { max-width: 400px; }
+
+    /* Page headings */
+    .page-head { padding: 64px 44px 36px; }
+    .page-head__title { font-size: 72px; }
+
+    /* Travel & Things to Do — 2-column card grid */
+    .page.travel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 28px;
+      padding: 0 36px 60px;
+      align-items: start;
+    }
+    .page.travel .page-head,
+    .page.travel .travel__intro,
+    .page.travel .section-title {
+      grid-column: 1 / -1;
+    }
+    .page.travel .card { margin: 0 0 28px; }
+    .card__title { font-size: 22px; }
+    .card__text { font-size: 15px; }
+
+    /* Playlist — wider cover */
+    .playlist__cover { width: 240px; height: 240px; }
+    .playlist__title-script { font-size: 64px; }
+
+    /* Gallery — 3 columns */
+    .gallery { column-count: 3; padding: 0 28px 60px; }
+
+    /* Wedding Party — 2-column groups */
+    .party {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 48px;
+      padding: 0 44px 60px;
+    }
+    .party > .page-head { grid-column: 1 / -1; }
+    .party .party__group { margin-top: 16px; }
+
+    /* Registry, FAQ, RSVP — centered with max-width */
+    .registry,
+    .faq,
+    .rsvp {
+      max-width: 680px;
+      margin: 0 auto;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    /* Footer */
+    .footer { padding: 44px 44px 56px; }
+  }
 </style>
 </head>
 <body>
