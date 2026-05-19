@@ -971,104 +971,137 @@
   /* ===== DESKTOP (≥ 860px) ===== */
   @media (min-width: 860px) {
 
-    body { background: var(--ivory-warm); }
+    body { background: var(--white); }
 
-    /* App shell: sidebar + content side by side */
+    /* App shell: full width, no sidebar */
     .app {
-      max-width: 1340px;
-      box-shadow: 0 0 80px -20px rgba(74,6,23,0.2);
-      display: grid;
-      grid-template-columns: 272px 1fr;
-      grid-template-rows: 1fr;
+      max-width: 100%;
+      box-shadow: none;
+      display: block;
       min-height: 100vh;
-      margin: 0 auto;
+      position: relative;
     }
 
-    /* Hide mobile header / hamburger */
+    /* Hide mobile header & drawer */
     .header { display: none !important; }
-
-    /* Drawer becomes a sticky left sidebar */
     .scrim { display: none !important; }
-    .drawer {
+    .drawer { display: none !important; }
+
+    /* ── Desktop top nav ── */
+    .desktop-nav {
       position: sticky;
       top: 0;
-      height: 100vh;
-      width: 272px;
-      transform: none !important;
-      transition: none !important;
-      grid-column: 1;
-      grid-row: 1;
-      overflow-y: auto;
-      padding: 44px 32px 40px;
-    }
-    .drawer__close { display: none; }
-    .drawer__brand { font-size: 50px; margin: 12px 0 4px; }
-    .drawer__sub { margin-bottom: 32px; }
-    .drawer__link { font-size: 15px; letter-spacing: 0.14em; padding: 11px 0; }
-
-    /* Main content column */
-    main {
-      grid-column: 2;
-      grid-row: 1;
-      min-width: 0;
+      z-index: 40;
+      height: 64px;
       background: var(--white);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      backdrop-filter: blur(8px);
     }
+    .desktop-nav.transparent {
+      position: absolute;
+      left: 0; right: 0; top: 0;
+      background: linear-gradient(180deg, rgba(26,6,8,0.52) 0%, rgba(26,6,8,0.18) 70%, transparent 100%);
+      border-bottom-color: transparent;
+      height: 80px;
+    }
+    .desktop-nav__links {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      gap: 0;
+    }
+    .desktop-nav__links--right { justify-content: flex-end; }
+    .desktop-nav__link {
+      font-family: var(--serif);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 10.5px;
+      color: var(--ink);
+      padding: 6px 13px;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .desktop-nav__link:hover { color: var(--crimson); }
+    .desktop-nav__link.active { color: var(--crimson); border-bottom: 1px solid var(--crimson); }
+    .desktop-nav.transparent .desktop-nav__link { color: rgba(255,255,255,0.82); }
+    .desktop-nav.transparent .desktop-nav__link:hover,
+    .desktop-nav.transparent .desktop-nav__link.active { color: var(--white); border-bottom-color: rgba(255,255,255,0.6); }
+    .desktop-nav__brand {
+      font-family: var(--script);
+      font-size: 30px;
+      line-height: 1;
+      padding-top: 6px;
+      color: var(--crimson);
+      flex-shrink: 0;
+      padding-left: 20px;
+      padding-right: 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--script);
+      transition: opacity 0.2s;
+    }
+    .desktop-nav__brand:hover { opacity: 0.8; }
+    .desktop-nav.transparent .desktop-nav__brand { color: var(--white); }
 
-    /* Home hero fills its column */
+    /* Full-width main */
+    main { width: 100%; }
+
+    /* Home hero full viewport */
     .home { min-height: 100vh; }
-    .home__title { font-size: clamp(72px, 7vw, 108px); }
-    .countdown { max-width: 400px; }
+    .home__title { font-size: clamp(80px, 10vw, 130px); }
+    .countdown { max-width: 440px; }
 
     /* Page headings */
-    .page-head { padding: 64px 44px 36px; }
-    .page-head__title { font-size: 72px; }
+    .page-head { padding: 60px 56px 36px; }
+    .page-head__title { font-size: 76px; }
 
-    /* Travel & Things to Do — 2-column card grid */
+    /* Travel & Things — 2-col card grid */
     .page.travel {
       display: grid;
       grid-template-columns: 1fr 1fr;
       column-gap: 28px;
-      padding: 0 36px 60px;
+      padding: 0 48px 60px;
       align-items: start;
     }
     .page.travel .page-head,
     .page.travel .travel__intro,
-    .page.travel .section-title {
-      grid-column: 1 / -1;
-    }
+    .page.travel .section-title { grid-column: 1 / -1; }
     .page.travel .card { margin: 0 0 28px; }
     .card__title { font-size: 22px; }
     .card__text { font-size: 15px; }
 
-    /* Playlist — wider cover */
+    /* Playlist */
     .playlist__cover { width: 240px; height: 240px; }
     .playlist__title-script { font-size: 64px; }
 
     /* Gallery — 3 columns */
-    .gallery { column-count: 3; padding: 0 28px 60px; }
+    .gallery { column-count: 3; padding: 0 36px 60px; }
 
     /* Wedding Party — 2-column groups */
     .party {
       display: grid;
       grid-template-columns: 1fr 1fr;
       column-gap: 48px;
-      padding: 0 44px 60px;
+      padding: 0 56px 60px;
     }
     .party > .page-head { grid-column: 1 / -1; }
     .party .party__group { margin-top: 16px; }
 
-    /* Registry, FAQ, RSVP — centered with max-width */
-    .registry,
-    .faq,
-    .rsvp {
-      max-width: 680px;
+    /* Registry, FAQ, RSVP — centered */
+    .registry, .faq, .rsvp {
+      max-width: 720px;
       margin: 0 auto;
       padding-left: 0;
       padding-right: 0;
     }
 
     /* Footer */
-    .footer { padding: 44px 44px 56px; }
+    .footer { padding: 44px 56px 56px; }
   }
 </style>
 </head>
@@ -1712,6 +1745,37 @@
       );
     }
 
+    /* ---------- Desktop Header ---------- */
+    function DesktopHeader({ transparent, route, go }) {
+      const left  = ROUTES.slice(1, 5); // Playlist, Travel, Things to Do, Photos
+      const right = ROUTES.slice(5);    // Wedding Party, Registry, FAQ, RSVP
+      return (
+        <nav className={"desktop-nav" + (transparent ? " transparent" : "")}>
+          <div className="desktop-nav__links">
+            {left.map(r => (
+              <a key={r.id} href={"#" + r.id}
+                 className={"desktop-nav__link" + (route === r.id ? " active" : "")}
+                 onClick={(e) => { e.preventDefault(); go(r.id); }}>
+                {r.label}
+              </a>
+            ))}
+          </div>
+          <button className="desktop-nav__brand" onClick={() => go("home")}>
+            The Ellis Wedding
+          </button>
+          <div className="desktop-nav__links desktop-nav__links--right">
+            {right.map(r => (
+              <a key={r.id} href={"#" + r.id}
+                 className={"desktop-nav__link" + (route === r.id ? " active" : "")}
+                 onClick={(e) => { e.preventDefault(); go(r.id); }}>
+                {r.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+      );
+    }
+
     /* ---------- App ---------- */
     function App() {
       const [route, go] = useHashRoute();
@@ -1730,6 +1794,7 @@
       return (
         <div className="app">
           <Header transparent={transparent} onMenu={() => setNavOpen(true)} onBrand={() => go("home")} />
+          <DesktopHeader transparent={transparent} route={route} go={go} />
           <main>
             <Page key={route} go={go} />
             {route !== "home" && <Footer />}
